@@ -19,19 +19,18 @@ public class TaskController{
     }
 
     @PostMapping
-    public Task addTask(@RequestParam String name, @RequestParam String status){
-        return taskService.addTask(name,status);
+    public Task addTask(@RequestBody Task task){
+        return taskService.addTask(task.getName(),task.getStatus());
     }
 
     @PutMapping("/{id}")
     public Task updateTask(@PathVariable int id,
-                           @RequestParam String name,
-                           @RequestParam String status){
-        return taskService.updateTask(id, name, status);
+                           @RequestBody Task task){
+        return taskService.updateTask(id,task.getName(), task.getStatus());
     }
     @DeleteMapping("/{id}")
-    public String deleteTask(@PathVariable int id){
-        boolean deleted = taskService.deleteTask(id);
-        return deleted? "Deleted":"Not Found";
+    public String deleteTask(@PathVariable int id) {
+        taskService.deleteTask(id);
+        return "Deleted";
     }
 }
