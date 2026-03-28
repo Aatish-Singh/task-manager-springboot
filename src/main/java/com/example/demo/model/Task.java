@@ -3,14 +3,19 @@ import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @NotBlank(message = "Name cannot be empty")
+    @Size(max= 100, message= "Name must be under 100 characters")
     private String name;
+
+    @NotBlank(message = "Status cannot be empty ")
     private String status;
 
     //constructor

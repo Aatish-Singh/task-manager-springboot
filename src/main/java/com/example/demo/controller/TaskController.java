@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.model.Task;
 import com.example.demo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -19,13 +21,13 @@ public class TaskController{
     }
 
     @PostMapping
-    public Task addTask(@RequestBody Task task){
+    public Task addTask(@Valid @RequestBody Task task){
         return taskService.addTask(task.getName(),task.getStatus());
     }
 
     @PutMapping("/{id}")
     public Task updateTask(@PathVariable int id,
-                           @RequestBody Task task){
+                           @Valid @RequestBody Task task){
         return taskService.updateTask(id,task.getName(), task.getStatus());
     }
     @DeleteMapping("/{id}")
